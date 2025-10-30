@@ -1,0 +1,18 @@
+public class Application {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+
+        StudentService service = context.getBean(StudentService.class);
+
+        Student s1 = new Student();
+        s1.setName("Kunal Rajput");
+        s1.setCourse("Computer Engineering");
+
+        service.registerStudent(s1);
+        service.payFee(s1.getId(), 5000.0);
+
+        System.out.println("Student Registered & Fee Paid!");
+        context.close();
+    }
+}
