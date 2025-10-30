@@ -1,0 +1,26 @@
+@Service
+@Transactional
+public class StudentServiceImpl implements StudentService {
+
+    @Autowired
+    private StudentDao studentDao;
+
+    @Override
+    public void registerStudent(Student s) {
+        studentDao.saveStudent(s);
+    }
+
+    @Override
+    public void payFee(int studentId, double amount) {
+        Student s = studentDao.getStudent(studentId);
+        s.setFee(s.getFee() + amount);
+        studentDao.updateStudent(s);
+    }
+
+    @Override
+    public void refundFee(int studentId, double amount) {
+        Student s = studentDao.getStudent(studentId);
+        s.setFee(s.getFee() - amount);
+        studentDao.updateStudent(s);
+    }
+}
